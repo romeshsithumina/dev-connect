@@ -2,6 +2,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import Theme from "./Theme";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   return (
@@ -34,7 +35,7 @@ const Navbar = () => {
             afterSignOutUrl="/"
           />
         </SignedIn>
-        MobileNav
+        <MobileNav />
       </div>
     </nav>
   );

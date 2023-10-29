@@ -4,30 +4,30 @@ import RenderTag from "../RenderTag";
 
 const hotQuestions = [
   {
-    _id: 1,
+    _id: "1",
     title:
       "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
   },
   {
-    _id: 2,
+    _id: "2",
     title: "Redux Toolkit Not Updating State as Expected",
   },
   {
-    _id: 3,
+    _id: "3",
     title: "Async/Await Function Not Handling Errors Properly",
   },
   {
-    _id: 4,
+    _id: "4",
     title: "How do I use express as a custom server in NextJS?",
   },
 ];
 
 const popularTags = [
-  { _id: 1, name: "javascript", totalQuestions: 5 },
-  { _id: 3, name: "python", totalQuestions: 8 },
-  { _id: 3, name: "react", totalQuestions: 5 },
-  { _id: 4, name: "tailwindcss", totalQuestions: 2 },
-  { _id: 5, name: "nextjs", totalQuestions: 6 },
+  { _id: "1", name: "javascript", totalQuestions: 5 },
+  { _id: "3", name: "python", totalQuestions: 8 },
+  { _id: "3", name: "react", totalQuestions: 5 },
+  { _id: "4", name: "tailwindcss", totalQuestions: 2 },
+  { _id: "5", name: "nextjs", totalQuestions: 6 },
 ];
 
 const RightSidebar = () => {

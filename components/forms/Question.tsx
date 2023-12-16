@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -37,10 +38,11 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
+      await createQuestion({});
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -125,7 +127,12 @@ const Question = () => {
               <FormControl className="mt-3.5">
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
-                  onInit={(evt, editor) => (editorRef.current = editor)}
+                  onInit={(evt, editor) =>
+                    // @ts-ignore
+                    (editorRef.current = editor)
+                  }
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 500,

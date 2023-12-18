@@ -1,6 +1,5 @@
 "use client";
 
-import RenderTag from "./RenderTag";
 import {
   Select,
   SelectContent,

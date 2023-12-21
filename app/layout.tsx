@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 import "./globals.css";
+import "../styles/prism.css";
+
 import React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter, Space_Grotesk } from "next/font/google";

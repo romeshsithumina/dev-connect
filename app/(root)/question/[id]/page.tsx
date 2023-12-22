@@ -9,12 +9,8 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-interface IParams {
-  questionId: string;
-}
-
-const Page = async ({ params }: { params: IParams }) => {
-  const result = await getQuestionById({ questionId: params.questionId });
+const Page = async ({ params }: any) => {
+  const result = await getQuestionById({ questionId: params.id });
   const { userId: clerkId } = auth();
 
   let mongoUser;

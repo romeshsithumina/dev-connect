@@ -10,11 +10,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface IParams {
-  questionId?: string;
+  questionId: string;
 }
 
-const Page = async ({ params }: { questionId: IParams }) => {
-  const result = await getQuestionById({ questionId: params.id });
+const Page = async ({ params }: { params: IParams }) => {
+  const result = await getQuestionById({ questionId: params.questionId });
   const { userId: clerkId } = auth();
 
   let mongoUser;

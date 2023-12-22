@@ -3,12 +3,25 @@ import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
 import { getQuestionById } from "@/lib/actions/question.action";
+import { getUserById } from "@/lib/actions/user.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-const Page = async ({ params, serachParams }) => {
+interface IParams {
+  questionId?: string;
+}
+
+const Page = async ({ params }: { questionId: IParams }) => {
   const result = await getQuestionById({ questionId: params.id });
+  const { userId: clerkId } = auth();
+
+  let mongoUser;
+
+  if (clerkId) {
+    mongoUser = await getUserById({ userId: clerkId });
+  }
 
   return (
     <>
@@ -73,7 +86,11 @@ const Page = async ({ params, serachParams }) => {
         ))}
       </div>
 
-      <Answer />
+      <Answer
+        question={result.content}
+        questionId={JSON.stringify(result._id)}
+        authorId={JSON.stringify(mongoUser._id)}
+      />
     </>
   );
 };

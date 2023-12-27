@@ -49,7 +49,7 @@ export async function createQuestion(params: CreateQuestionParams) {
         // find something (filter)
         { name: { $regex: new RegExp(`${tag}$`, "i") } },
         // perform action on the found thing (update)
-        { $setOnInsert: { name: tag }, $push: { question: question._id } },
+        { $setOnInsert: { name: tag }, $push: { questions: question._id } },
         // additional options
         { upsert: true, new: true }
       );

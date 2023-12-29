@@ -49,3 +49,11 @@ export function formatNumber(num: number): string {
     return num.toString();
   }
 }
+
+export function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+  };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+}

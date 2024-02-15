@@ -172,7 +172,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
     connectToDatabase();
 
     // const { clerkId, page = 1, pageSize = 10, filter, searchQuery } = params;
-    const { clerkId, searchQuery } = params;
+    const { clerkId, searchQuery, filter } = params;
 
     const query: FilterQuery<typeof Answer> = {};
 
@@ -180,11 +180,31 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
       query.$or = [{ title: { $regex: new RegExp(searchQuery, "i") } }];
     }
 
+    let sortOptions = {};
+
+    switch (filter) {
+      case "most_recent":
+        sortOptions = { createdAt: -1 };
+        break;
+      case "oldest":
+        sortOptions = { createdAt: 1 };
+        break;
+      case "most_voted":
+        sortOptions = { upvotes: -1 };
+        break;
+      case "most_viewed":
+        sortOptions = { views: -1 };
+        break;
+      case "most_asnwered":
+        sortOptions = { answers: -1 };
+        break;
+    }
+
     const user = await User.findOne({ clerkId }).populate({
       path: "saved",
       match: query,
       options: {
-        sort: { createdAt: -1 },
+        sort: sortOptions,
       },
       populate: [
         { path: "tags", model: Tag, select: "_id name" },

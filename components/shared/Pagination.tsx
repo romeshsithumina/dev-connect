@@ -7,9 +7,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 interface Props {
   pageNumber: number;
   isNext: boolean;
+  options?: {};
 }
 
-const Pagination = ({ pageNumber, isNext }: Props) => {
+const Pagination = ({ pageNumber, isNext, options }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -23,7 +24,7 @@ const Pagination = ({ pageNumber, isNext }: Props) => {
       value: nextPageNumber.toString(),
     });
 
-    router.push(newUrl);
+    router.push(newUrl, options);
   };
 
   if (pageNumber === 1 && !isNext) {

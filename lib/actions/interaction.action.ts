@@ -4,6 +4,7 @@ import Question from "@/database/question.model";
 import { connectToDatabase } from "../mongoose";
 import { ViewQuestionParams } from "./shared.types";
 import Interaction from "@/database/interaction.model";
+import User from "@/database/user.model";
 
 export async function viewQuestion(params: ViewQuestionParams) {
   try {
@@ -12,18 +13,26 @@ export async function viewQuestion(params: ViewQuestionParams) {
     const { userId, questionId } = params;
 
     // Update the view count for the question
-    await Question.findByIdAndUpdate(questionId, { $inc: { views: 1 } });
+    await Question.findByIdAndUpdate(questionId, {
+      $inc: { views: 1 },
+    });
+
+    const question = await Question.findOne({ _id: questionId });
+
+    if (!question) {
+      throw new Error("Question not found");
+    }
+
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: 1 },
+    });
 
     if (userId) {
-      const existingInteraction = await Interaction.findOne({
+      await Interaction.findOne({
         user: userId,
         action: "view",
         question: questionId,
       });
-
-      if (existingInteraction) {
-        console.log("User has already viewed");
-      }
 
       // Create interaction
       await Interaction.create({

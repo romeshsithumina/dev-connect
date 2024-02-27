@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
           {
             role: "system",
             content:
-              "You are an expert assistant in answering coding problems in the DevConnect platform. You are only answering platform and coding related questions.",
+              "You are an expert assistant in answering coding questions in the DevConnect platform. You are only answering DevConnect platform and coding related questions. Reject answering non-related questions.",
           },
           { role: "user", content: `Tell me ${question}` },
         ],

@@ -1,11 +1,11 @@
+import UserCard from "@/components/cards/UserCard";
+import Filter from "@/components/shared/Filter";
+import Pagination from "@/components/shared/Pagination";
 import LocalSearch from "@/components/shared/search/LocalSearch";
 import { UserFilters } from "@/constants/filters";
-import Filter from "@/components/shared/Filter";
 import { getAllUsers } from "@/lib/actions/user.action";
-import Link from "next/link";
-import UserCard from "@/components/cards/UserCard";
 import { SearchParamsProps } from "@/types";
-import Pagination from "@/components/shared/Pagination";
+import Link from "next/link";
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({

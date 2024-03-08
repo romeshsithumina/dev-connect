@@ -19,13 +19,11 @@ export async function viewQuestion(params: ViewQuestionParams) {
 
     const question = await Question.findOne({ _id: questionId });
 
-    if (!question) {
-      throw new Error("Question not found");
+    if (question) {
+      await User.findByIdAndUpdate(question.author, {
+        $inc: { reputation: 1 },
+      });
     }
-
-    await User.findByIdAndUpdate(question.author, {
-      $inc: { reputation: 1 },
-    });
 
     if (userId) {
       await Interaction.findOne({

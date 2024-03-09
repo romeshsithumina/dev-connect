@@ -7,6 +7,13 @@ import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Collection | DevConnect",
+  description:
+    "DevConnect is a dynamic web application designed to empower and unite developers worldwide.",
+};
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { userId } = auth();

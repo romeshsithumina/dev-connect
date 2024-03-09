@@ -2,6 +2,13 @@ import Profile from "@/components/forms/Profile";
 import { getUserById } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit Profile | DevConnect",
+  description:
+    "DevConnect is a dynamic web application designed to empower and unite developers worldwide.",
+};
 
 const Page = async ({ params }: ParamsProps) => {
   const { userId } = auth();

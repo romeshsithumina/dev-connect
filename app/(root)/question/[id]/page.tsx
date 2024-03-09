@@ -12,6 +12,25 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // fetch data
+  const result = await getQuestionById({ questionId: params.id });
+
+  return {
+    title: result.title + " | DevConnect",
+  };
+}
+
 const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
 
